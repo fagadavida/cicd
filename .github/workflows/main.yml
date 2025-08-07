@@ -1,21 +1,28 @@
-name: Deploy to Truehost
-
+name: Deploy to Truehost (FTP)
 on:
   push:
-    branches: [main]
-
+    branches: [main] # or any branch you prefer
 jobs:
-  deploy:
+  ftp-deploy:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
 
-      - name: Upload via SFTP
-        uses: appleboy/scp-action@v0.1.7
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+
+      - name: Upload via FTP
+        uses: SamKirkland/FTP-Deploy-Action@4.3.0
         with:
-          host: ${{ secrets.FTP_SERVER }}
+          server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }} # if you use password auth
-          port: 21
-          source: "."
-          target: "/home/ggldxqnf/public_html"
+          password: ${{ secrets.FTP_PASSWORD }}
+          port: ${{ secrets.FTP_PORT }}
+          protocol: ftp
+          # optional: only upload changed files
+          local-dir: .
+          remote-dir: /public_html/cicd.bbismkd.com.ng/ # adjust if your site lives elsewhere
+          exclude: |
+            .git*
+            .github*
+            README.md
+            .env
