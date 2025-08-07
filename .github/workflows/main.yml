@@ -20,7 +20,7 @@ jobs:
           protocol: ftp
           # optional: only upload changed files
           local-dir: ./
-          remote-dir: /public_html/cicd.bbismkd.com.ng/ # adjust if your site lives elsewhere
+          server-dir: /public_html/cicd.bbismkd.com.ng/ # adjust if your site lives elsewhere
           exclude: |
             .git*
             .github*
