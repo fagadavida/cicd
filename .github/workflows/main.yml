@@ -20,4 +20,10 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
+
+          port: ${{ secrets.FTP_PORT }}
+          protocol: ftp
+          # optional: only upload changed files
+          local-dir: ./
+          server-dir: /public_html/cicd.bbismkd.com.ng/ # adjust if your site lives elsewhere
           exclude: .git,README.md
